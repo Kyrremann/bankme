@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    concurrent-ruby (1.1.7)
+    faker (2.15.1)
+      i18n (>= 1.6, < 2)
+    i18n (1.8.5)
+      concurrent-ruby (~> 1.0)
+    oj (3.10.16)
+    ougai (1.8.5)
+      oj (~> 3.10)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  faker (~> 2.15)
+  ougai (~> 1.8)
+
+BUNDLED WITH
+   2.1.4
