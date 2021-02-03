@@ -26,7 +26,7 @@ class VirtualCustomer
       Log.info("#{bank.id}: Interacting with #{bank.name}")
 
       if create_new_customer?(bank)
-        bank.new_customer!
+        Log.info("Created new customer: #{bank.new_customer!}")
       end
 
       bank.customers.each do |customer|
