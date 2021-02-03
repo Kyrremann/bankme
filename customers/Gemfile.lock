@@ -1,21 +1,21 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    amq-protocol (2.3.2)
+    bunny (2.17.0)
+      amq-protocol (~> 2.3, >= 2.3.1)
     concurrent-ruby (1.1.7)
     faker (2.15.1)
       i18n (>= 1.6, < 2)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    oj (3.10.16)
-    ougai (1.8.5)
-      oj (~> 3.10)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bunny (~> 2.17)
   faker (~> 2.15)
-  ougai (~> 1.8)
 
 BUNDLED WITH
-   2.1.4
+   2.2.3
