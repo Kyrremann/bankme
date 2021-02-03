@@ -4,10 +4,12 @@ require 'faker'
 
 require_relative 'log'
 require_relative 'action'
+require_relative 'action_factory'
 require_relative 'bank'
 
 class VirtualCustomer
   def initialize
+    @actionFactory = ActionFactory.new
     @bank = Bank.new(Faker::Company.name)
   end
 
@@ -30,8 +32,8 @@ class VirtualCustomer
       end
 
       bank.customers.each do |customer|
-        action = Action.new_interaction(customer)
-        action.push if action
+        action = Action.new(customer)
+        @actionFactory.publish(action)
       end
       bank.action_completed!
     end
