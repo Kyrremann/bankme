@@ -4,7 +4,6 @@ module Log
   def self.logger
     if @logger.nil?
       @logger = Logger.new( STDOUT)
-      #@logger.datetime_format = "%H:%M:%S "
     end
     @logger
   end
