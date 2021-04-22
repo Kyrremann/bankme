@@ -4,6 +4,8 @@ require 'bunny'
 require_relative 'log'
 
 class ActionFactory
+  include Log
+
   def initialize
     @connection = Bunny.new
     @connection.start
@@ -13,11 +15,11 @@ class ActionFactory
 
   def publish(action)
     return unless action
-    Log.info(action)
+    log.info(action)
 
     payload = {
-      bank: action.band_id
-      action: = action
+      bank: action.bank_id,
+      action: action
     }
     @channel.default_exchange.publish(payload.to_json, routing_key: @queue.name)
   end

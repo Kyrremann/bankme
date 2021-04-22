@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json'
-require_relative 'log'
 
 class Action
   def initialize(customer)
@@ -35,6 +34,7 @@ class Action
   end
 
   private
+
   def new_interaction
     case interaction_value
     when 0
@@ -57,7 +57,7 @@ class Action
   end
 
   def interaction_value
-    # todo - burde støtte mulighet for å delte interactions per level
+    # TODO: burde støtte mulighet for å delte interactions per level
     case @customer.bank_level
     when 0
       rand(2)

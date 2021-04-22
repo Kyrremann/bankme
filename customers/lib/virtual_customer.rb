@@ -8,8 +8,10 @@ require_relative 'action_factory'
 require_relative 'bank'
 
 class VirtualCustomer
+  include Log
+
   def initialize
-    @actionFactory = ActionFactory.new
+    @action_factory = ActionFactory.new
     @bank = Bank.new(Faker::Company.name)
   end
 
@@ -24,19 +26,16 @@ class VirtualCustomer
 
   def interact_with_banks
     banks.each do |bank|
-      return unless bank.time_for_new_action?
-      Log.info("#{bank.id}: Interacting with #{bank.name}")
+      break unless bank.time_for_new_action?
 
-      if create_new_customer?(bank)
-        Log.info("Created new customer: #{bank.new_customer!}")
-      end
+      log.info("#{bank.id}: Interacting with #{bank.name}")
+      log.info("Created new customer: #{bank.new_customer!}") if create_new_customer?(bank)
 
       bank.customers.each do |customer|
         action = Action.new(customer)
-        @actionFactory.publish(action)
+        @action_factory.publish(action)
       end
       bank.action_completed!
     end
   end
 end
-

@@ -5,7 +5,7 @@ require 'securerandom'
 require_relative 'customer'
 
 class Bank
-  attr_reader :name, :id, :level
+  attr_reader :name, :id, :level, :customers
 
   def initialize(name)
     @name = name
@@ -17,10 +17,6 @@ class Bank
 
   def time_for_new_action?
     @next_time_for_action <= Time.now
-  end
-
-  def customers
-    @customers
   end
 
   def new_customer!
