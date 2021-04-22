@@ -1,0 +1,23 @@
+@startuml
+actor player
+participant "player website" as banksite
+participant game
+database banks
+control "virtual customers" as vc
+queue rabbit
+control communicator as com
+control controller as ctrl
+
+player -> game : Register participant (name/url)
+game -> banks : Register bank URL
+vc -> banks : Retrieve banks
+vc -> rabbit : Send actions
+com -> rabbit : Get actions
+com -> banksite : Interact with banks URL
+banksite -> com : Respond on http call
+com -> rabbit : Send respons
+ctrl -> rabbit : Get respons
+ctrl -> banks : Record feedback
+game -> banks : Get feedback for bank
+player -> game : Watch score and feedback
+@enduml
