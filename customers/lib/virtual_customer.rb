@@ -2,10 +2,9 @@
 
 require 'faker'
 
-require_relative 'log'
-require_relative 'action'
 require_relative 'action_factory'
 require_relative 'bank'
+require_relative 'log'
 
 class VirtualCustomer
   include Log
@@ -16,7 +15,7 @@ class VirtualCustomer
   end
 
   def banks
-    # get all banks in database
+    # TODO: Get banks from API/database
     [@bank]
   end
 
@@ -32,7 +31,7 @@ class VirtualCustomer
       log.info("Created new customer: #{bank.new_customer!}") if create_new_customer?(bank)
 
       bank.customers.each do |customer|
-        action = Action.new(customer)
+        action = @action_factory.new_interaction(customer)
         @action_factory.publish(action)
       end
       bank.action_completed!

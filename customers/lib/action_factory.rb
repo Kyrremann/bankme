@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'bunny'
+
+require_relative 'action'
 require_relative 'log'
 
 class ActionFactory
@@ -11,6 +13,10 @@ class ActionFactory
     @connection.start
     @channel = @connection.create_channel
     @queue = @channel.queue("outbound_actions")
+  end
+
+  def new_interaction(customer)
+    Action.new(customer)
   end
 
   def publish(action)
